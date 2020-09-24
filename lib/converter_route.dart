@@ -1,97 +1,51 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
-import 'package:meta/meta.dart';
+// Copyright 2018 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
+import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 import 'package:hello_rectangle/unit.dart';
 
-final _backgroundColor = Colors.green[100];
+class ConverterRoute extends StatefulWidget {
+  final Color color;
 
-class ConverterRoute extends StatelessWidget {
-  const ConverterRoute();
+  final List<Unit> units;
+
+  const ConverterRoute({
+    @required this.color,
+    @required this.units,
+  })  : assert(color != null),
+        assert(units != null);
 
   @override
-  _CategoryRouteState createState() => _CategoryRouteState();
+  _ConverterRouteState createState() => _ConverterRouteState();
 }
 
-class _CategoryRouteState extends State<CategoryRoute> {
-  final _categories = <Category>[];
-
-  static const _categoryNames = <String>[
-    'Length',
-    'Area',
-    'Volume',
-    'Mass',
-    'Time',
-    'Digital Storage',
-    'Energy',
-    'Currency',
-  ];
-
-  static const _baseColors = <Color>[
-    Colors.teal,
-    Colors.orange,
-    Colors.pinkAccent,
-    Colors.blueAccent,
-    Colors.yellow,
-    Colors.greenAccent,
-    Colors.purpleAccent,
-    Colors.red,
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    for (var i = 0; i < _categoryNames.length; i++) {
-      _categories.add(Category(
-        name: _categoryNames[i],
-        color: _baseColors[i],
-        iconLocation: Icons.cake,
-        units: _retrieveUnitList(_categoryNames[i]),
-      ));
-    }
-  }
-
-  Widget _buildCategoryWidgets() {
-    return ListView.builder(
-      itemBuilder: (BuildContext context, int index) => _categories[index],
-      itemCount: _categories.length,
-    );
-  }
-
-  List<Unit> _retrieveUnitList(String categoryName) {
-    return List.generate(10, (int i) {
-      i += 1;
-      return Unit(
-        name: '$categoryName Unit $i',
-        conversion: i.toDouble(),
-      );
-    });
-  }
-
+class _ConverterRouteState extends State<ConverterRoute> {
   @override
   Widget build(BuildContext context) {
-    final listView = Container(
-      color: _backgroundColor,
-      padding: EdgeInsets.symmetric(horizontal: 8.0),
-      child: _buildCategoryWidgets(),
-    );
-
-    final appBar = AppBar(
-      elevation: 0.0,
-      title: Text(
-        'Unit converter',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 30.0,
+    final unitWidgets = widget.units.map((Unit unit) {
+      return Container(
+        color: widget.color,
+        margin: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          children: <Widget>[
+            Text(
+              unit.name,
+              style: Theme.of(context).textTheme.headline,
+            ),
+            Text(
+              'Conversion: ${unit.conversion}',
+              style: Theme.of(context).textTheme.subhead,
+            ),
+          ],
         ),
-      ),
-      centerTitle: true,
-      backgroundColor: _backgroundColor,
-    );
+      );
+    }).toList();
 
-    return Scaffold(
-      appBar: appBar,
-      body: listView,
+    return ListView(
+      children: unitWidgets,
     );
   }
 }
