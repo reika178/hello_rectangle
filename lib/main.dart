@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 // TODO: Import the CategoryRoute widget
 import 'package:hello_rectangle/category_route.dart';
+import 'category_route.dart';
 
 /// The function that is called when main.dart is run.
 void main() {
@@ -22,8 +23,14 @@ class UnitConverterApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Unit Converter',
-      // TODO: Instead of pointing to exactly 1 Category widget,
-      // our home should now point to an instance of the CategoryRoute widget.
+      theme: ThemeData(
+        textTheme: Theme.of(context).textTheme.apply(
+          bodyColor: Colors.black,
+          displayColor: Colors.grey[600],
+        ),
+        primaryColor: Colors.grey[500],
+        textSelectionHandleColor: Colors.green[500],
+      ),
       home: CategoryRoute(),
     );
   }

@@ -26,17 +26,17 @@ class ConverterRoute extends StatefulWidget {
 class _ConverterRouteState extends State<ConverterRoute> {
   Unit _fromValue;
   Unit _toValue;
-  double _inputvalue;
+  double _inputValue;
   String _convertedValue = '';
   List<DropdownMenuItem> _unitMenuItems;
   bool _showValidationError = false;
 
   @override
   void initState() {
-    super.initState() {
-      _createDropdownMenuItems();
-      _setdefaults();
-    }
+    super.initState();
+    _createDropdownMenuItems();
+    _setDefaults();
+  }
 
     void _createDropdownMenuItems() {
       var newItems = <DropdownMenuItem>[];
@@ -145,7 +145,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
           data: Theme.of(context).copyWith(
             canvasColor: Colors.grey[50],
           ),
-          child: DropdownHideUnderline(
+          child: DropdownButtonHideUnderline(
             child: ButtonTheme(
               alignedDropdown: true,
               child: DropdownButton(
