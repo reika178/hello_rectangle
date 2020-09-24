@@ -5,8 +5,8 @@ import 'package:hello_rectangle/unit.dart';
 
 final _backgroundColor = Colors.green[100];
 
-class ConverterRoute extends StatelessWidget {
-  const ConverterRoute();
+class CategoryRoute extends StatefulWidget {
+  const CategoryRoute();
 
   @override
   _CategoryRouteState createState() => _CategoryRouteState();
