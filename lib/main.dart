@@ -6,7 +6,6 @@
 import 'package:flutter/material.dart';
 
 // TODO: Import the CategoryRoute widget
-import 'package:hello_rectangle/category_route.dart';
 import 'category_route.dart';
 
 /// The function that is called when main.dart is run.
