@@ -14,6 +14,8 @@ class CategoryRoute extends StatefulWidget {
 }
 
 class _CategoryRouteState extends State<CategoryRoute> {
+  Category _defaultCategory;
+  Category _currentCategory;
   final _categories = <Category>[];
 
   static const _categoryNames = <String>[
@@ -67,18 +69,24 @@ class _CategoryRouteState extends State<CategoryRoute> {
   void initState() {
     super.initState();
     for (var i = 0; i < _categoryNames.length; i++) {
-      _categories.add(Category(
+      var category = Category(
         name: _categoryNames[i],
         color: _baseColors[i],
         iconLocation: Icons.cake,
         units: _retrieveUnitList(_categoryNames[i]),
-      ));
+      );
       if (i == 0) {
-        _defailtCategory = category;
+        _defaultCategory = category;
       }
 
       _categories.add(category);
     }
+  }
+
+  void _onCategoryTap(Category category) {
+    setState(() {
+      _currentCategory = category;
+    });
   }
 
   Widget _buildCategoryWidgets() {
@@ -111,7 +119,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
         right: 8.0,
         bottom: 48.0,
       ),
-      child: _buildCategoryWidget(),
+      child: _buildCategoryWidgets(),
     );
 
     return Backdrop(

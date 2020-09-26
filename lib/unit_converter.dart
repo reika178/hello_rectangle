@@ -20,10 +20,17 @@ class UnitConverter extends StatefulWidget {
 class _UnitConverterState extends State<UnitConverter> {
   Unit _fromValue;
   Unit _toValue;
-  double _inpurValue;
+  double _inputValue;
   String _convertedValue = '';
   List<DropdownMenuItem> _unitMenuItems;
   bool _showValidationError = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _createDropdownMenuItems();
+    _setDefaults();
+  }
 
   @override
   void didUpdateWidget(UnitConverter old) {
@@ -183,7 +190,7 @@ class _UnitConverterState extends State<UnitConverter> {
       ),
     );
 
-    final arrows = RotateBox(
+    final arrows = RotatedBox(
       quarterTurns: 1,
       child: Icon(
         Icons.compare_arrows,
@@ -191,7 +198,7 @@ class _UnitConverterState extends State<UnitConverter> {
       ),
     );
 
-    final putput = Padding(
+    final output = Padding(
       padding: _padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -221,6 +228,11 @@ class _UnitConverterState extends State<UnitConverter> {
         arrows,
         output,
       ],
+    );
+
+    return Padding(
+      padding: _padding,
+      child: converter,
     );
   }
 }

@@ -93,7 +93,6 @@ class _BackdropTitle extends AnimatedWidget {
               ).value,
               child: frontTitle,
             ),
-          ),
         ],
       ),
     );
@@ -125,7 +124,7 @@ class Backdrop extends StatefulWidget {
 
 class _BackdropState extends State<Backdrop>
     with SingleTickerProviderStateMixin {
-  final GlobalKey _backdropkey = GlobalKey(debugLabel: 'Backdrop');
+  final GlobalKey _backdropKey = GlobalKey(debugLabel: 'Backdrop');
   AnimationController _controller;
 
   @override
@@ -163,7 +162,7 @@ class _BackdropState extends State<Backdrop>
 
   bool get _backdropPanelVisible {
     final AnimationStatus status = _controller.status;
-    return status = AnimationStatus.completed ||
+    return status == AnimationStatus.completed || 
         status == AnimationStatus.forward;
   }
 
@@ -201,7 +200,7 @@ class _BackdropState extends State<Backdrop>
             _controller.value < 0.5 ? -_kFlingVelocity : _kFlingVelocity);
   }
 
-  Widget _buildStack(BuildContext context, BoxConstraints consttainsts) {
+  Widget _buildStack(BuildContext context, BoxConstraints constraints) {
     const double panelTitleHeight = 48.0;
     final Size panelSize = constraints.biggest;
     final double panelTop = panelSize.height - panelTitleHeight;
